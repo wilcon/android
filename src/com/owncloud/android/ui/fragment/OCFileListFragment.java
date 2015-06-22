@@ -430,12 +430,15 @@ public class OCFileListFragment extends ExtendedListFragment {
             setFooterText(generateFooterText(filesCount, foldersCount));
 
             // decide grid vs list view
-            OwnCloudVersion version = AccountUtils.getServerVersion(((FileActivity)mContainerActivity).getAccount());
-            if (version != null && version.supportsRemoteThumbnails() &&
-                    imagesCount == filesCount) {
-                switchToGridView();
-            } else {
-                switchToListView();
+            OwnCloudVersion version = AccountUtils.getServerVersion(
+                    ((FileActivity)mContainerActivity).getAccount());
+            if (filesCount > 0) {
+                if (version != null && version.supportsRemoteThumbnails() &&
+                        imagesCount == filesCount) {
+                    switchToGridView();
+                } else {
+                    switchToListView();
+                }
             }
         }
     }
